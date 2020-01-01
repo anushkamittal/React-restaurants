@@ -7,6 +7,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 import {DISHES} from '../shared/dishes';
 import {LEADERS} from '../shared/leaders';
 import {PROMOTIONS} from '../shared/promotions';
@@ -48,6 +49,12 @@ class Main extends Component {
       )
     }
 
+    const Aboutus = () => {
+      return (
+        <About leaders={this.state.leaders}/>
+      )
+    }
+
     return (
       <div className="App">
         <Navbar dark color="primary">
@@ -61,6 +68,7 @@ class Main extends Component {
           <Route exact path='/menu' component={()=> <Menu  dishes={this.state.dishes} onClick={(dishId)=>{this.onDishSelect(dishId)}} />} />
           <Route exact path='/contactus' component={Contact} />
           <Route path='/menu/:dishId' component={DishWithId} />
+          <Route path='/aboutus' component={Aboutus} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
