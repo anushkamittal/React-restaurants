@@ -41,6 +41,13 @@ class Main extends Component {
       )
     }
 
+    const DishWithId = ({match}) =>{
+      return(
+        <Dishdetail dish={this.state.dishes.filter((dish)=> dish.id === parseInt(match.params.dishId,10))[0] } 
+                    comments={this.state.comments.filter((comment)=> comment.dishId === parseInt(match.params.dishId,10))}/>
+      )
+    }
+
     return (
       <div className="App">
         <Navbar dark color="primary">
@@ -53,6 +60,7 @@ class Main extends Component {
           <Route path='/home' component={Homepage} />
           <Route exact path='/menu' component={()=> <Menu  dishes={this.state.dishes} onClick={(dishId)=>{this.onDishSelect(dishId)}} />} />
           <Route exact path='/contactus' component={Contact} />
+          <Route path='/menu/:dishId' component={DishWithId} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
