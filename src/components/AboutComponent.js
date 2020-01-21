@@ -9,11 +9,11 @@ function RenderLeader({leader}){
                 <Media object src={leader.image} alt="Generic placeholder image" />
             </Media>
             <Media body>
-            <Media heading>
-                {leader.name}
-            </Media>
-            <p>{leader.designation}</p>
-            <p>{leader.description}</p>
+                <Media heading>
+                    {leader.name}
+                </Media>
+                <p>{leader.designation}</p>
+                <p>{leader.description}</p>
             </Media>
         </Media>
     )

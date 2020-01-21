@@ -119,7 +119,7 @@ class Contact extends Component {
                                         placeholder="Telephone no."  className="form-control"
                                         validators={{
                                             required, minLength: minLength(3) , maxLength: maxLength(15) ,isNumber
-                                        }}/>
+                                    }}/>
                                 </Col>
                                 <Errors
                                     className="text-danger"

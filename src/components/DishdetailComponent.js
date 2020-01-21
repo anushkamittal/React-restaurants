@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody,Modal, ModalHeader , ModalBody,
     CardTitle, Breadcrumb, BreadcrumbItem, Label, Row, Button,Col,Form,FormGroup,Input} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {LocalForm,Control, Errors} from 'react-redux-form';
+import {Loading} from './LoadingComponent';
 
 const required = (val) => (val) && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <=len);
@@ -126,8 +127,26 @@ function RenderComments({comments,addComment,dishId}){
     }
 }
 
-function RenderDish({dish}){
-    if(dish != null){
+function RenderDish({dish,isLoading,errMess}){
+    if(isLoading){
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        )
+    }
+    else if(errMess){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h4>{errMess}</h4>
+                </div>
+            </div>
+        )
+    }
+    else if(dish != null){
         return (
             <div className="row">
                  <div className="col-12 col-md-5 m-1">
@@ -156,6 +175,25 @@ function RenderDish({dish}){
 
 const Dishdetail = (props) => {
 
+    if(props.dishesLoading){
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        )
+    }
+    else if(props.dishesErrMess){
+        return(
+            <div className="container">
+                <div className="row">
+                    <h4>{props.dishesErrMess}</h4>
+                </div>
+            </div>
+        )
+    }
+    else
             return(
                 <div className="container">
                     <div className="row">
@@ -170,7 +208,7 @@ const Dishdetail = (props) => {
                     </div>
                     <div className="row">
                         <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={props.dish} />
+                            <RenderDish dish={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
                         </div>
                         <div className="col-12 col-md-5 m-1">
                             <RenderComments comments={props.comments} 
